@@ -42,7 +42,7 @@ function App() {
           <textarea value={message} onChange={(e) => setMessage(e.target.value)}></textarea>
           <button type="submit">Submit</button>
         </form>
-        {response.split("\n\n").map((t, key) => {
+        {response.split("\n").map((t, key) => {
           return <h2 key={key}>{t}</h2>;
         })}
       </div>
