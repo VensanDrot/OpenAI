@@ -4,9 +4,11 @@ import "./App.css";
 function App() {
   const [message, setMessage] = useState("");
   const [response, setResponse] = useState("");
+  const [model, setModel] = useState("/");
   const handleSubmite = (e) => {
     e.preventDefault();
-    fetch("http://localhost:3001/", {
+    //console.log(model);
+    fetch("http://localhost:3001" + model, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -14,13 +16,24 @@ function App() {
       body: JSON.stringify({ message }),
     })
       .then((res) => res.json())
-      .then((res) => setResponse(res.message));
+      .then((res) => {
+        //console.log(res);
+        setResponse(res.message);
+      });
   };
   return (
     <>
       <div className="App">
-        <form onSubmit={handleSubmite}>
-          <select>
+        <form className="Form" onSubmit={handleSubmite}>
+          <h2>OpenAi Testing</h2>
+          <label>Model: </label>
+          <select
+            className="dsadsa"
+            value={model}
+            onChange={(e) => {
+              setModel(e.target.value);
+            }}
+          >
             <option value="/" defaultChecked>
               text-davinci-003
             </option>
@@ -29,7 +42,9 @@ function App() {
           <textarea value={message} onChange={(e) => setMessage(e.target.value)}></textarea>
           <button type="submit">Submit</button>
         </form>
-        <h2>{response}</h2>
+        {response.split("\n\n").map((t, key) => {
+          return <h2 key={key}>{t}</h2>;
+        })}
       </div>
     </>
   );

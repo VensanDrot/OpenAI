@@ -1,12 +1,42 @@
 .App {
+    height: 50vh;
+    position: absolute;
+    top: 10vh;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    width: 50%;
     text-align: center;
     display: grid;
 }
 
-.App form {
-    width: 50%;
+.Form {
+    width: 100%;
     justify-self: center;
     display: flex;
     flex-direction: column;
     row-gap: 1rem;
+    position: relative;
+}
+
+label {
+    text-align: left;
+}
+
+.Form h2 {
+    margin: 0;
+}
+
+textarea {
+    max-width: 100%;
+    min-height: 20vh;
+    max-height: 40vh;
+    resize: vertical;
+}
+
+textarea,
+button,
+select {
+    font-size: 20px;
 }

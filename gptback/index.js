@@ -4,6 +4,9 @@ import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import { Configuration, OpenAIApi } from "openai";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
 
@@ -12,8 +15,8 @@ app.use(cors());
 
 const configuration = new Configuration({
   organization: "org-tZ4PHQU8zeNFFEG6WV6JpvH2",
-  //apiKey: process.env.OPENAI_API_KEY,
-  apiKey: "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",
+  apiKey: process.env.OPENAI_API_KEY,
+  //apiKey: "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",
 });
 const openai = new OpenAIApi(configuration);
 
@@ -26,7 +29,7 @@ app.post("/", async (req, res) => {
     temperature: 0,
   });
 
-  console.log(response.data.choices);
+  //console.log(response.data.choices);
   if (response.data.choices) {
     res.json({
       message: response.data.choices[0].text,
@@ -35,6 +38,7 @@ app.post("/", async (req, res) => {
 });
 
 app.post("/gpt3", async (req, res) => {
+  const { message } = req.body;
   const response = await openai.createChatCompletion({
     model: "gpt-3.5-turbo",
     messages: [{ role: "user", content: `${message}` }],
