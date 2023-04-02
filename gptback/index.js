@@ -1,15 +1,16 @@
-//openai
-// express
+// imports
 import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import { Configuration, OpenAIApi } from "openai";
 import dotenv from "dotenv";
 
+//env must be created and contain OPENAI_API_KEY= Your API key
+
+// env variable
 dotenv.config();
 
 const app = express();
-
 app.use(bodyParser.json());
 app.use(cors());
 
@@ -18,7 +19,7 @@ const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
 });
 const openai = new OpenAIApi(configuration);
-
+// for davinci
 app.post("/", async (req, res) => {
   const { message } = req.body;
   const response = await openai.createCompletion({
@@ -36,6 +37,7 @@ app.post("/", async (req, res) => {
   }
 });
 
+// for gpt3
 app.post("/gpt3", async (req, res) => {
   const { message } = req.body;
   const response = await openai.createChatCompletion({
@@ -50,4 +52,5 @@ app.post("/gpt3", async (req, res) => {
   }
 });
 
+// local host port 3001
 app.listen(3001, () => console.log("listening on port 3001"));

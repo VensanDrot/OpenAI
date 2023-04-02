@@ -8,7 +8,7 @@ function App() {
   const handleSubmite = (e) => {
     e.preventDefault();
     //console.log(model);
-    fetch("https://open-ai-wine.vercel.app" + model, {
+    fetch("http://localhost:3001" + model, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
