@@ -4,7 +4,6 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import { Configuration, OpenAIApi } from "openai";
 import dotenv from "dotenv";
-
 //env must be created and contain OPENAI_API_KEY= Your API key
 
 // env variable
@@ -45,7 +44,7 @@ app.post("/gpt3", async (req, res) => {
     messages: [{ role: "user", content: `${message}` }],
     temperature: 0,
   });
-  if (response.data.choices) {
+  if (response.data.choices ) {
     res.json({
       message: response.data.choices[0].message.content,
     });

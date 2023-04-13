@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import "./App.css";
+import "./index.css";
 
-function App() {
+const DefGPT = () => {
   const [message, setMessage] = useState("");
   const [response, setResponse] = useState("");
   const [model, setModel] = useState("/");
-  const handleSubmite = (e) => {
+  const handleSubmite = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     //console.log(model);
     fetch("http://localhost:3001" + model, {
@@ -23,7 +23,7 @@ function App() {
   };
   return (
     <>
-      <div className="App">
+      <div className="GPT">
         <form className="Form" onSubmit={handleSubmite}>
           <h2>OpenAi Testing</h2>
           <label>Model: </label>
@@ -48,6 +48,6 @@ function App() {
       </div>
     </>
   );
-}
+};
 
-export default App;
+export default DefGPT;
