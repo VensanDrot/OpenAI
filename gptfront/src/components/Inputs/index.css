@@ -1,0 +1,15 @@
+.input_element_container {
+    display: flex;
+    flex-direction: row;
+    row-gap: 0.5rem;
+}
+
+.form textarea, .form input {
+    width: 30vw;
+    min-height: 5vh;
+    max-height: 10vh;    
+}
+
+.form label {
+    width: 13vw;
+}

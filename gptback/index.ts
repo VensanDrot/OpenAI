@@ -24,7 +24,7 @@ app.post("/", async (req, res) => {
   const response = await openai.createCompletion({
     model: "text-davinci-003",
     prompt: message,
-    max_tokens: 100,
+    max_tokens: 2000,
     temperature: 0,
   });
 
@@ -50,6 +50,30 @@ app.post("/gpt3", async (req, res) => {
     });
   }
 });
+
+
+// for gpt3
+app.post("/medicine", async (req, res) => {
+  const { data } = req.body;
+  const string = JSON.stringify(data);
+  console.log("here");
+  let smth = string.replace("{",'').replace("}","").replace('",','" \n')
+  const response = await openai.createChatCompletion({
+    model: "gpt-3.5-turbo",
+    messages: [{ role: "user", content: `${smth}` }],
+    temperature: 0,
+  });
+  console.log(response.data.choices[0])
+  if (response.data.choices ) {
+    res.json({
+      message: response.data.choices[0].message.content,
+    });
+  }
+});
+
+
+
+
 
 // local host port 3001
 app.listen(3001, () => console.log("listening on port 3001"));
